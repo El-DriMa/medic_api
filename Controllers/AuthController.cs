@@ -2,7 +2,7 @@
 using medic_api.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-[Route("api/[controller]")]
+[Route("api")]
 [ApiController]
 public class AuthController : ControllerBase
 {

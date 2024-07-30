@@ -9,7 +9,7 @@ using Microsoft.Identity.Client;
 
 namespace medic_api.Controllers
 {
-    [Route("api/[Controller]")]
+    [Route("api")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -23,20 +23,20 @@ namespace medic_api.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("users")]
         public async Task<IActionResult> GetAll()
         {
             var userDomain = await userRepository.GetAllUsers();
             return Ok(mapper.Map<List<UsersDTO>>(userDomain));
         }
-        [HttpGet("details/{Id}")]
+        [HttpGet("users/details/{Id}")]
         public async Task<IActionResult> GetById(int Id)
         {
             var userDomain=await userRepository.GetById(Id);
             if (userDomain == null) return NotFound();
             return Ok(mapper.Map<UsersDetailsDTO>(userDomain));
         }
-        [HttpPost("block/{Id}")]
+        [HttpPost("users/block/{Id}")]
         public async Task<IActionResult> BlockUser(int Id)
         {
             var user=await userRepository.GetById(Id);
