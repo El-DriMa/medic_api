@@ -3,6 +3,8 @@ using medic_api.Mappings;
 using medic_api.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,10 +15,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCors(options => options.AddPolicy(name: "FrontUI", policy =>
-{
-    policy.WithOrigins("https://localhost:4200/").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-}));
+
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("MedicLabServer")));
@@ -25,9 +24,11 @@ builder.Services.AddScoped<IUserRepository, SQLUserRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutomapperProfiles));
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddCors(options => options.AddPolicy(name: "FrontUI", policy =>
+{
+    policy.WithOrigins("https://medicapi.azurewebsites.net/").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+}));
+
 
 var app = builder.Build();
 
@@ -39,7 +40,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("FrontUI");
+app.UseCors();
 
 app.UseAuthorization();
 
