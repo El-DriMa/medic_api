@@ -26,7 +26,7 @@ builder.Services.AddAutoMapper(typeof(AutomapperProfiles));
 
 builder.Services.AddCors(options => options.AddPolicy(name: "FrontUI", policy =>
 {
-    policy.WithOrigins("https://medic-web.vercel.app/", "http://localhost:8083/", "https://app.swaggerhub.com/apis/AHODZIC649_1/medic_api/1.0", "https://mediclab-hgeqa9e0aagjgce5.northeurope-01.azurewebsites.net/").AllowAnyMethod().AllowAnyHeader();
+    policy.WithOrigins("http://localhost:8081", "https://app.swaggerhub.com/apis/AHODZIC649_1/medic_api/1.0", "https://mediclab-hgeqa9e0aagjgce5.northeurope-01.azurewebsites.net", "https://medic-web.vercel.app").AllowAnyMethod().AllowAnyHeader();
 }));
 
 
