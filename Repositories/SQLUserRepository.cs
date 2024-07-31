@@ -1,4 +1,5 @@
-﻿using medic_api.Data;
+﻿using AutoMapper;
+using medic_api.Data;
 using medic_api.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,12 @@ namespace medic_api.Repositories
         public async Task RegisterUser(User user)
         {
             dbContext.Users.Add(user);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task EditUser(User user)
+        {
+            dbContext.Users.Update(user);
             await dbContext.SaveChangesAsync();
         }
     }

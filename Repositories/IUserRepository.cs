@@ -9,5 +9,6 @@ namespace medic_api.Repositories
         Task BlockUser(User user);
         Task<User> GetUserByUsernameAndPassword(string username, string password);
         Task RegisterUser(User user);
+        Task EditUser(User user);
     }
 }

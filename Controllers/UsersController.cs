@@ -55,6 +55,23 @@ namespace medic_api.Controllers
             await userRepository.RegisterUser(domainUser);
             return Ok(new { Message = "User registered successfully" });
         }
+        [HttpPut("users/update/{id}")]
+        public async Task<IActionResult> EditUser([FromBody] UsersDetailsDTO user)
+        {
+            var existingUser = await userRepository.GetById(user.Id);
+
+            if (user.Name != null) existingUser.Name = user.Name;
+            if (user.Username != null) existingUser.Username = user.Username;
+            if (user.Orders != null) existingUser.Orders = user.Orders;
+            if (user.LastLoginDate != null) existingUser.LastLoginDate = user.LastLoginDate;
+            if (user.ImageUrl != null) existingUser.ImageUrl = user.ImageUrl;
+            if (user.Status != null) existingUser.Status = user.Status;
+            if (user.DateOfBirth != null) existingUser.DateOfBirth = user.DateOfBirth;
+
+            await userRepository.EditUser(existingUser);
+
+            return Ok(new { Message = "Data edited successfully" });
+        }
 
     }
 }

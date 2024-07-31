@@ -26,20 +26,26 @@ builder.Services.AddAutoMapper(typeof(AutomapperProfiles));
 
 builder.Services.AddCors(options => options.AddPolicy(name: "FrontUI", policy =>
 {
-    policy.WithOrigins("https://medicapi.azurewebsites.net/").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    policy.WithOrigins("https://medic-web.vercel.app/", "http://localhost:8083/", "https://app.swaggerhub.com/apis/AHODZIC649_1/medic_api/1.0", "https://mediclab-hgeqa9e0aagjgce5.northeurope-01.azurewebsites.net/").AllowAnyMethod().AllowAnyHeader();
 }));
 
 
 var app = builder.Build();
-app.UseRouting();
-
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment()) { }
-
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+    
+app.UseCors("FrontUI");
+//app.UseSwaggerUI(options =>
+//{
+//    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+//    options.RoutePrefix = string.Empty;
+//});
 
-app.UseCors();
+app.UseRouting();
 
 app.UseAuthorization();
 app.UseHttpsRedirection();
