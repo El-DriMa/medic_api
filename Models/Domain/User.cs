@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace medic_api.Models.Domain;
 
@@ -16,6 +17,7 @@ public partial class User
     public string? Name { get; set; }
 
     public int? Orders { get; set; }
+
 
     public DateTime? LastLoginDate { get; set; }
 

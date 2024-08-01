@@ -1,4 +1,6 @@
-﻿namespace medic_api.Models.DTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace medic_api.Models.DTOs
 {
     public class UsersDTO
     {

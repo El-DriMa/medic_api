@@ -1,4 +1,6 @@
-﻿namespace medic_api.Models.DTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace medic_api.Models.DTOs
 {
     public class UsersDetailsDTO
     {
@@ -15,7 +17,6 @@
         public string? ImageUrl { get; set; }
 
         public string? Status { get; set; }
-
         public DateTime? DateOfBirth { get; set; }
     }
 }
