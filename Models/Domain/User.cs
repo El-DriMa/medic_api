@@ -12,7 +12,7 @@ public partial class User
 
     public string PasswordHash { get; set; } = null!;
 
-    public string? Role { get; set; }
+    public string? Role { get; set; } = "Employee";
 
     public string? Name { get; set; }
 
@@ -23,7 +23,7 @@ public partial class User
 
     public string? ImageUrl { get; set; }
 
-    public string? Status { get; set; }
+    public string? Status { get; set; }="Active";
 
     public DateTime? DateOfBirth { get; set; }
 }
